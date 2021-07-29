@@ -1,10 +1,10 @@
 BASE_TASK_CONFIG_PATH: habitat_extensions/config/robo_vln_task.yaml
-SIMULATOR_GPU_ID: [0]
-TORCH_GPU_ID: 0
-NUM_PROCESSES: 1
+SIMULATOR_GPU_ID: [4]
+TORCH_GPU_ID: 5
+NUM_PROCESSES: 10
 TRAINER_NAME : "hierarchical_trainer"
 
-TENSORBOARD_DIR: data/robo-vln/checkpoints/tensorboard_dirs/hierarchical_cma
+TENSORBOARD_DIR: data/robo-vln/tensorboard_dirs/hierarchical_cma
 CHECKPOINT_FOLDER: data/robo-vln/checkpoints/hierarchical_cma/
 EVAL_CKPT_PATH_DIR: data/robo-vln/checkpoints/hierarchical_cma/
 

@@ -2,11 +2,11 @@ BASE_TASK_CONFIG_PATH: habitat_extensions/config/robo_vln_task.yaml
 SIMULATOR_GPU_ID: [0]
 TORCH_GPU_ID: 0
 NUM_PROCESSES: 1
-TRAINER_NAME : "robo_vln_trainer"
+TRAINER_NAME : "hierarchical_trainer"
 
-TENSORBOARD_DIR: data/robo-vln/tensorboard_dirs/cma
-CHECKPOINT_FOLDER: data/robo-vln/checkpoints/cma
-EVAL_CKPT_PATH_DIR: data/robo-vln/checkpoints/cma/ckpt.32.pth 
+TENSORBOARD_DIR: data/robo-vln/paper-model/checkpoints/tensorboard_dirs/hierarchical_cma
+CHECKPOINT_FOLDER: data/robo-vln/paper-model/checkpoints/hierarchical_cma/
+EVAL_CKPT_PATH_DIR: data/robo-vln/paper-model/checkpoints/hierarchical_cma/HCM_Agent.pth
 
 VIDEO_DIR: ""
 PLOT_ATTENTION: False
@@ -16,15 +16,11 @@ EVAL:
   USE_CKPT_CONFIG: False
   SPLIT: val_unseen
   EPISODE_COUNT: 1224
-  VAL_LOG_DIR : validation_logging/cma
+  VAL_LOG_DIR : validation_logging/hierarchical_cma
 DAGGER:
   ITERATIONS: 1
-  EPOCHS: 25
-  UPDATE_SIZE: 5000
-  #7739  
-  #570
-  #1224
-  COLLECT_DATA_SPLIT: train
+  EPOCHS: 45
+  UPDATE_SIZE: 20
   BATCH_SIZE: 1
   P: 1.0
   PRELOAD_LMDB_FEATURES: True
@@ -33,9 +29,6 @@ DAGGER:
 
 MODEL:
   INSTRUCTION_ENCODER:
-    bidirectional: True
-  CMA:
-    use: True
-  INSTRUCTION_ENCODER:
-    use_pretrained_embeddings: True
-    is_bert: False
+    final_state_only: False
+    use_pretrained_embeddings: False
+    is_bert: True

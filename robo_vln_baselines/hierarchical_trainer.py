@@ -248,11 +248,11 @@ class IWTrajectoryDataset(torch.utils.data.IterableDataset):
             obs['instruction'] = instruction_batch
             del obs['glove_tokens']
         for k, v in obs.items():
-            obs[k] = torch.from_numpy(v)
+            obs[k] = torch.from_numpy(v.copy())
 
-        prev_actions = torch.from_numpy(prev_actions)
-        oracle_stop = torch.from_numpy(oracle_stop)
-        oracle_actions = torch.from_numpy(oracle_actions)
+        prev_actions = torch.from_numpy(prev_actions.copy())
+        oracle_stop = torch.from_numpy(oracle_stop.copy())
+        oracle_actions = torch.from_numpy(oracle_actions.copy())
         return (obs, prev_actions, oracle_actions, oracle_stop)
 
     def __iter__(self):
@@ -290,7 +290,7 @@ class RoboDaggerTrainer(BaseRLTrainer):
         )
 
         self.device2 = (
-            torch.device("cuda:1")
+            torch.device("cuda", self.config.SIMULATOR_GPU_ID[0])
             if torch.cuda.is_available()
             else torch.device("cpu")
         )
